@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,16 +28,19 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
+    z-index:50;
+    pointer-events:none;
+    opacity:.35;
     background:
-        radial-gradient(circle,rgba(20,60,45,.25),transparent 60%),
         repeating-linear-gradient(
             0deg,
-            rgba(255,255,255,.025) 0 1px,
-            transparent 1px 4px
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.025) 4px
         );
-    pointer-events:none;
-    z-index:50;
 }
+
+/* PANTALLAS */
 
 .screen{
     position:fixed;
@@ -44,7 +48,7 @@ body::before{
     display:none;
     justify-content:center;
     align-items:center;
-    padding:25px;
+    padding:20px;
     z-index:10;
 }
 
@@ -56,101 +60,108 @@ body::before{
 
 #intro{
     background:
-        radial-gradient(circle,rgba(70,0,0,.25),transparent 50%),
+        radial-gradient(circle at center,rgba(30,80,40,.20),transparent 45%),
+        radial-gradient(circle at 80% 20%,rgba(120,0,0,.15),transparent 30%),
         #020303;
 }
 
 .intro-box{
     width:min(850px,95%);
     text-align:center;
-    padding:45px;
-    border:1px solid #263f32;
-    background:rgba(2,10,7,.95);
-    box-shadow:0 0 60px rgba(0,255,100,.08);
+    padding:40px;
+    border:1px solid #285335;
+    background:rgba(2,9,5,.96);
+    box-shadow:
+        0 0 40px rgba(0,255,100,.08),
+        inset 0 0 40px rgba(0,255,100,.03);
 }
 
 .warning{
-    color:#ff3131;
+    color:#ff3333;
     font-size:14px;
     letter-spacing:4px;
-    margin-bottom:25px;
-    animation:flicker 1.8s infinite;
+    margin-bottom:20px;
+    animation:flicker 1.5s infinite;
 }
 
 h1{
     font-family:'Creepster',cursive;
-    font-size:clamp(55px,9vw,105px);
-    color:#b7ffb7;
-    letter-spacing:5px;
+    font-size:clamp(55px,9vw,100px);
+    color:#b8ffbe;
+    letter-spacing:4px;
     text-shadow:
-        0 0 5px #80ff80,
-        0 0 20px #168c44;
+        0 0 8px #5cff75,
+        0 0 25px #0e7130;
 }
 
 .subtitle{
-    margin:20px auto;
-    color:#76977f;
-    max-width:650px;
-    line-height:1.8;
+    margin:15px 0 25px;
+    color:#5cff78;
 }
 
 .story{
-    margin:30px auto;
     max-width:650px;
-    color:#c3c3c3;
+    margin:auto;
+    color:#aeb8b0;
     line-height:1.8;
 }
+
+.start{
+    margin-top:30px;
+    padding:17px 40px;
+    font-size:18px;
+}
+
+/* BOTONES */
 
 button{
     font-family:'Share Tech Mono',monospace;
     cursor:pointer;
-    border:1px solid #4cff78;
-    color:#baffc6;
-    background:#06130b;
-    padding:14px 25px;
+    color:#c5ffd0;
+    background:#061009;
+    border:1px solid #376f45;
+    padding:15px 20px;
     transition:.2s;
 }
 
 button:hover{
-    background:#123b20;
-    box-shadow:0 0 20px rgba(76,255,120,.3);
-    transform:scale(1.03);
-}
-
-.main-btn{
-    font-size:18px;
-    padding:17px 45px;
+    color:white;
+    border-color:#5cff78;
+    background:#0d2614;
+    box-shadow:0 0 20px rgba(92,255,120,.2);
+    transform:translateY(-2px);
 }
 
 /* JUEGO */
 
 #game{
-    background:#010202;
-    align-items:stretch;
     padding:0;
+    align-items:stretch;
+    background:#010202;
 }
 
-.game-container{
+.game{
     width:100%;
     height:100vh;
     display:flex;
     flex-direction:column;
 }
 
-.topbar{
-    height:75px;
-    border-bottom:1px solid #253c2c;
+.header{
+    height:70px;
+    flex-shrink:0;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     padding:0 25px;
+    border-bottom:1px solid #243c2a;
     background:#030705;
     position:relative;
 }
 
 .logo{
-    color:#72ff91;
-    font-size:18px;
+    color:#5cff78;
+    font-size:16px;
 }
 
 .stats{
@@ -161,45 +172,48 @@ button:hover{
 
 .timer{
     color:#ff4545;
-    font-size:22px;
+    font-size:21px;
+}
+
+.timer.warning{
+    animation:blink .5s infinite;
 }
 
 .lives{
-    color:#ff6767;
+    color:#ff6464;
+    font-size:18px;
 }
 
 .progress{
     position:absolute;
-    left:0;
     bottom:0;
+    left:0;
     height:3px;
-    background:#4cff78;
     width:100%;
+    background:#5cff78;
     transition:width 1s linear;
 }
 
-/* TERMINAL */
-
-.content{
+.area{
     flex:1;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:25px;
+    padding:20px;
     overflow:auto;
 }
 
 .terminal{
     width:min(950px,100%);
-    min-height:500px;
-    border:1px solid #274a34;
+    min-height:470px;
+    border:1px solid #285235;
     background:#030806;
-    box-shadow:0 0 60px rgba(0,255,100,.05);
+    box-shadow:0 0 50px rgba(0,255,100,.05);
 }
 
-.terminal-head{
-    height:42px;
-    border-bottom:1px solid #24392b;
+.terminal-bar{
+    height:40px;
+    border-bottom:1px solid #203a27;
     display:flex;
     align-items:center;
     gap:7px;
@@ -213,92 +227,152 @@ button:hover{
     background:#555;
 }
 
-.terminal-body{
-    padding:35px;
+.content{
+    padding:30px;
 }
 
 .level{
-    color:#4cff78;
-    font-size:14px;
+    color:#5cff78;
+    font-size:13px;
     margin-bottom:15px;
 }
 
-.glitch-title{
+.title{
+    font-size:28px;
     color:#fff;
-    font-size:30px;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
-.message{
-    color:#a7b8aa;
+.text{
+    color:#aebaae;
     line-height:1.8;
-    margin-bottom:30px;
-    white-space:pre-line;
+    margin-bottom:20px;
 }
 
-.choice-grid{
+.clue{
+    border-left:3px solid #5cff78;
+    background:#061008;
+    padding:20px;
+    color:#acd8b4;
+    line-height:1.8;
+    margin:20px 0;
+}
+
+.choices{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
 }
 
 .choice{
     text-align:left;
-    min-height:75px;
-    border-color:#273f2d;
-    color:#b7cbb9;
-}
-
-.choice:hover{
-    border-color:#4cff78;
-    color:#fff;
-}
-
-/* PISTAS */
-
-.clue{
-    border-left:3px solid #4cff78;
-    background:#061008;
-    padding:20px;
-    margin:20px 0;
-    color:#a7d8b0;
-    line-height:1.7;
-}
-
-.clue strong{
-    color:#fff;
+    min-height:70px;
 }
 
 /* PUERTAS */
 
 .doors{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
 }
 
 .door{
-    min-height:150px;
-    border:1px solid #393939;
-    background:#070707;
+    min-height:145px;
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     gap:10px;
+    background:#060706;
 }
 
-.door:hover{
-    border-color:#ff3d3d;
-    box-shadow:0 0 25px rgba(255,0,0,.15);
+.door-icon{
+    font-size:42px;
 }
 
-.door .icon{
-    font-size:40px;
+.door-name{
+    color:white;
+    font-size:17px;
 }
 
-.door-title{
-    color:#ddd;
+/* MENSAJE */
+
+.feedback{
+    text-align:center;
+    padding:45px 20px;
+}
+
+.feedback-icon{
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+.feedback h2{
+    color:#ff4444;
+    margin-bottom:15px;
+}
+
+.feedback p{
+    color:#aaa;
+    line-height:1.7;
+}
+
+/* FINAL */
+
+#final{
+    background:
+        radial-gradient(circle,rgba(0,80,30,.15),transparent 50%),
+        #020303;
+}
+
+.final-box{
+    width:min(750px,95%);
+    text-align:center;
+    padding:45px;
+    border:1px solid #4cff78;
+    background:#030806;
+    box-shadow:0 0 50px rgba(0,255,100,.08);
+}
+
+.final-icon{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.final-title{
+    font-family:'Creepster',cursive;
+    font-size:60px;
+    color:#baffc2;
+    margin-bottom:20px;
+}
+
+.final-text{
+    color:#aebaae;
+    line-height:1.8;
+    white-space:pre-line;
+    margin-bottom:30px;
+}
+
+/* SUSTO */
+
+.jumpscare{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    align-items:center;
+    justify-content:center;
+    background:#000;
+}
+
+.jumpscare.show{
+    display:flex;
+}
+
+.eye{
+    font-size:min(35vw,260px);
+    animation:shake .08s infinite;
 }
 
 /* ALERTA */
@@ -306,98 +380,53 @@ button:hover{
 .alert{
     position:fixed;
     inset:0;
-    background:rgba(80,0,0,.15);
     pointer-events:none;
-    opacity:0;
     z-index:40;
+    opacity:0;
+    background:rgba(255,0,0,.10);
 }
 
 .alert.active{
-    animation:alarm .6s infinite;
-}
-
-/* SUSTO */
-
-.jumpscare{
-    position:fixed;
-    inset:0;
-    background:#000;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:100;
-}
-
-.jumpscare.active{
-    display:flex;
-}
-
-.face{
-    font-size:min(30vw,250px);
-    filter:grayscale(1);
-    animation:shake .08s infinite;
-}
-
-/* FINAL */
-
-.final-box{
-    width:min(800px,95%);
-    text-align:center;
-    padding:50px;
-    border:1px solid #4cff78;
-    background:#030806;
-}
-
-.final-icon{
-    font-size:70px;
-    margin-bottom:20px;
-}
-
-.final-title{
-    font-family:'Creepster';
-    font-size:60px;
-    margin-bottom:20px;
-}
-
-.final-text{
-    color:#a9b8aa;
-    line-height:1.8;
-    margin-bottom:30px;
+    animation:redAlert .6s infinite;
 }
 
 /* ANIMACIONES */
 
 @keyframes flicker{
-    0%,18%,22%,65%,100%{opacity:1}
-    20%,21%,64%{opacity:.2}
+    0%,18%,22%,70%,100%{opacity:1}
+    20%,21%,69%{opacity:.2}
 }
 
-@keyframes alarm{
+@keyframes blink{
+    50%{opacity:.2}
+}
+
+@keyframes redAlert{
     0%,100%{opacity:0}
     50%{opacity:1}
 }
 
 @keyframes shake{
-    0%{transform:translate(3px,2px)}
-    50%{transform:translate(-3px,-2px)}
-    100%{transform:translate(2px,-3px)}
+    0%{transform:translate(4px,2px)}
+    50%{transform:translate(-4px,-3px)}
+    100%{transform:translate(2px,4px)}
 }
 
 /* CELULAR */
 
 @media(max-width:650px){
 
-    .choice-grid,
-    .doors{
-        grid-template-columns:1fr;
+    body{
+        overflow:auto;
     }
 
-    .topbar{
+    .header{
+        height:65px;
         padding:0 12px;
     }
 
     .logo{
-        font-size:11px;
+        font-size:10px;
     }
 
     .stats{
@@ -405,16 +434,34 @@ button:hover{
         font-size:12px;
     }
 
-    .terminal-body{
+    .area{
+        align-items:flex-start;
+        padding:10px;
+    }
+
+    .terminal{
+        margin-top:10px;
+    }
+
+    .content{
         padding:20px;
     }
 
-    .glitch-title{
-        font-size:23px;
+    .choices,
+    .doors{
+        grid-template-columns:1fr;
+    }
+
+    .title{
+        font-size:22px;
+    }
+
+    .final-title{
+        font-size:45px;
     }
 
     .intro-box{
-        padding:25px;
+        padding:25px 18px;
     }
 }
 </style>
@@ -422,177 +469,199 @@ button:hover{
 
 <body>
 
-<!-- =========================
-     PANTALLA INICIAL
-========================= -->
+<!-- ===============================
+     INTRODUCCIÓN
+================================ -->
 
 <section id="intro" class="screen active">
 
-<div class="intro-box">
+    <div class="intro-box">
 
-<div class="warning">
-⚠ SISTEMA COMPROMETIDO ⚠
-</div>
+        <div class="warning">
+            ⚠ SISTEMA COMPROMETIDO ⚠
+        </div>
 
-<h1>EL CÓDIGO MALDITO</h1>
+        <h1>EL CÓDIGO MALDITO</h1>
 
-<div class="subtitle">
-UNA EXPERIENCIA DE TERROR TECNOLÓGICO
-</div>
+        <div class="subtitle">
+            EXPERIENCIA DE TERROR TECNOLÓGICO
+        </div>
 
-<div class="story">
+        <div class="story">
 
-Año 03:17 AM.<br><br>
+            Son las 03:17 AM.
 
-Has encontrado un antiguo laboratorio informático abandonado.<br><br>
+            <br><br>
 
-Uno de los computadores todavía está encendido.<br><br>
+            Has entrado a un antiguo laboratorio
+            informático abandonado.
 
-Al tocar el teclado, aparece un mensaje:
+            <br><br>
 
-<br><br>
+            Un computador todavía está encendido.
 
-<strong style="color:#ff4444;">
-"NO DEBISTE DESPERTAR EL SISTEMA."
-</strong>
+            <br><br>
 
-<br><br>
+            Cuando tocas el teclado aparece:
 
-Tienes <strong>5 minutos</strong> para recuperar el control.
+            <br><br>
 
-<br><br>
+            <strong style="color:#ff3333">
+            "NO DEBISTE DESPERTAR EL SISTEMA."
+            </strong>
 
-Las respuestas están ocultas.
+            <br><br>
 
-No encontrarás preguntas normales.
+            Tienes <strong>5 minutos</strong>.
 
-Encontrarás pistas.
+            <br><br>
 
-</div>
+            No encontrarás preguntas normales.
 
-<button class="main-btn" onclick="startGame()">
-▶ ENTRAR AL SISTEMA
-</button>
+            <br>
 
-</div>
+            Tendrás que descubrir las respuestas
+            mediante pistas.
+
+        </div>
+
+        <button class="start" onclick="startGame()">
+            ▶ ENTRAR AL SISTEMA
+        </button>
+
+    </div>
 
 </section>
 
 
-<!-- =========================
+<!-- ===============================
      JUEGO
-========================= -->
+================================ -->
 
 <section id="game" class="screen">
 
-<div class="game-container">
+<div class="game">
 
-<header class="topbar">
+    <header class="header">
 
-<div class="logo">
-[ SISTEMA // CODIGO_MALDITO ]
-</div>
+        <div class="logo">
+            [ SISTEMA // CODIGO_MALDITO ]
+        </div>
 
-<div class="stats">
+        <div class="stats">
 
-<div class="timer">
-⏱ <span id="time">05:00</span>
-</div>
+            <div id="timer" class="timer">
+                ⏱ <span id="time">05:00</span>
+            </div>
 
-<div class="lives">
-♥ <span id="lives">3</span>
-</div>
+            <div class="lives">
+                ♥ <span id="lives">3</span>
+            </div>
 
-</div>
+        </div>
 
-<div class="progress" id="progress"></div>
+        <div id="progress" class="progress"></div>
 
-</header>
+    </header>
 
-<div class="content">
 
-<div class="terminal">
+    <main class="area">
 
-<div class="terminal-head">
+        <div class="terminal">
 
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
+            <div class="terminal-bar">
 
-</div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
 
-<div class="terminal-body" id="gameContent"></div>
+            </div>
 
-</div>
+            <div id="content" class="content"></div>
 
-</div>
+        </div>
+
+    </main>
 
 </div>
 
 </section>
 
 
-<!-- =========================
+<!-- ===============================
      FINAL
-========================= -->
+================================ -->
 
 <section id="final" class="screen">
 
-<div class="final-box">
+    <div class="final-box">
 
-<div class="final-icon" id="finalIcon">
-☠
-</div>
+        <div id="finalIcon" class="final-icon">
+            ☠️
+        </div>
 
-<div class="final-title" id="finalTitle">
-SISTEMA BLOQUEADO
-</div>
+        <div id="finalTitle" class="final-title">
+            SISTEMA BLOQUEADO
+        </div>
 
-<div class="final-text" id="finalText"></div>
+        <div id="finalText" class="final-text"></div>
 
-<button onclick="location.reload()">
-↻ VOLVER A INTENTAR
-</button>
+        <button onclick="location.reload()">
+            ↻ JUGAR DE NUEVO
+        </button>
 
-</div>
+    </div>
 
 </section>
 
 
-<div class="alert" id="alert"></div>
+<!-- SUSTO -->
 
-<div class="jumpscare" id="jumpscare">
-<div class="face">👁️</div>
+<div id="jumpscare" class="jumpscare">
+
+    <div class="eye">
+        👁️
+    </div>
+
 </div>
+
+
+<!-- ALERTA -->
+
+<div id="alert" class="alert"></div>
 
 
 <script>
 
-/* =========================
-   VARIABLES
-========================= */
+/* =================================
+   CONFIGURACIÓN
+================================= */
 
-let currentStage = 0;
+const TOTAL_TIME = 300;
+
+let time = TOTAL_TIME;
 
 let lives = 3;
 
 let score = 0;
 
-let timeLeft = 300;
+let stage = 0;
 
 let timer;
 
 
-/* =========================
+/* =================================
    INICIAR
-========================= */
+================================= */
 
 function startGame(){
 
-    document.getElementById("intro")
+    document
+        .getElementById("intro")
         .classList.remove("active");
 
-    document.getElementById("game")
+    document
+        .getElementById("game")
         .classList.add("active");
 
     showStage();
@@ -601,19 +670,19 @@ function startGame(){
 }
 
 
-/* =========================
+/* =================================
    TEMPORIZADOR
-========================= */
+================================= */
 
 function updateTimer(){
 
-    timeLeft--;
+    time--;
 
-    let minutes =
-        Math.floor(timeLeft / 60);
+    const minutes =
+        Math.floor(time / 60);
 
-    let seconds =
-        timeLeft % 60;
+    const seconds =
+        time % 60;
 
     document.getElementById("time")
         .textContent =
@@ -621,31 +690,36 @@ function updateTimer(){
         + ":"
         + String(seconds).padStart(2,"0");
 
-    let percentage =
-        (timeLeft / 300) * 100;
+
+    const percentage =
+        (time / TOTAL_TIME) * 100;
 
     document.getElementById("progress")
         .style.width =
         percentage + "%";
 
 
-    if(timeLeft <= 30){
+    if(time <= 30){
 
         document
-        .getElementById("alert")
-        .classList.add("active");
+            .getElementById("alert")
+            .classList.add("active");
+
+        document
+            .getElementById("timer")
+            .classList.add("warning");
 
     }
 
 
-    if(timeLeft <= 0){
+    if(time <= 0){
 
         clearInterval(timer);
 
-        endGame(
+        finish(
             "⏰",
             "EL TIEMPO TERMINÓ",
-            "El sistema ha tomado el control.\n\nNo lograste descubrir todos los secretos antes de que el contador llegara a cero."
+            "El sistema ha tomado el control.\n\nNo descubriste todos los secretos antes de que el contador llegara a cero."
         );
 
     }
@@ -653,615 +727,690 @@ function updateTimer(){
 }
 
 
-/* =========================
-   VIDAS
-========================= */
+/* =================================
+   MOSTRAR ETAPA
+================================= */
 
-function updateLives(){
+function showStage(){
+
+    const content =
+        document.getElementById("content");
+
+
+    /* =============================
+       ETAPA 1
+    ============================= */
+
+    if(stage === 0){
+
+        content.innerHTML = `
+
+            <div class="level">
+                ARCHIVO 01 // IDENTIDAD DEL SISTEMA
+            </div>
+
+            <div class="title">
+                LA MÁQUINA ESTÁ VIVA
+            </div>
+
+            <div class="text">
+
+                El computador acaba de encenderse.
+
+                <br><br>
+
+                No puedes ver ninguna pieza física
+                que explique lo que está sucediendo.
+
+                <br><br>
+
+                Sin embargo, hay algo que permite
+                que la máquina ejecute instrucciones,
+                abra aplicaciones y realice tareas.
+
+            </div>
+
+            <div class="clue">
+
+                <strong>PISTA:</strong>
+
+                <br><br>
+
+                "No puedes tocarme.
+                No tengo cuerpo.
+
+                <br><br>
+
+                Pero sin mí,
+                esta máquina no podría ejecutar
+                sus instrucciones."
+
+            </div>
+
+            <div class="text">
+
+                Encuentra qué es aquello
+                que está haciendo funcionar
+                el sistema.
+
+            </div>
+
+            <div class="choices">
+
+                <button class="choice"
+                    onclick="answer(0,true)">
+                    A) Los programas e instrucciones
+                    que permiten realizar tareas
+                </button>
+
+                <button class="choice"
+                    onclick="answer(0,false)">
+                    B) Las partes físicas
+                    del computador
+                </button>
+
+                <button class="choice"
+                    onclick="answer(0,false)">
+                    C) La electricidad
+                </button>
+
+                <button class="choice"
+                    onclick="answer(0,false)">
+                    D) La conexión a Internet
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =============================
+       ETAPA 2
+    ============================= */
+
+    else if(stage === 1){
+
+        content.innerHTML = `
+
+            <div class="level">
+                ARCHIVO 02 // CONTRATO DIGITAL
+            </div>
+
+            <div class="title">
+                EL DOCUMENTO PROHIBIDO
+            </div>
+
+            <div class="text">
+
+                Encuentras un archivo oculto.
+
+                <br><br>
+
+                Al abrirlo aparece una advertencia:
+
+            </div>
+
+            <div class="clue">
+
+                <strong>
+                "PUEDES UTILIZAR ESTE SOFTWARE..."
+                </strong>
+
+                <br><br>
+
+                "...pero existen condiciones que
+                determinan qué puedes hacer con él,
+                copiarlo, modificarlo o distribuirlo."
+
+            </div>
+
+            <div class="text">
+
+                El sistema necesita saber
+                qué concepto describe estas
+                condiciones.
+
+            </div>
+
+            <div class="choices">
+
+                <button class="choice"
+                    onclick="answer(1,true)">
+                    A) Una licencia de software
+                </button>
+
+                <button class="choice"
+                    onclick="answer(1,false)">
+                    B) Un antivirus
+                </button>
+
+                <button class="choice"
+                    onclick="answer(1,false)">
+                    C) Una contraseña
+                </button>
+
+                <button class="choice"
+                    onclick="answer(1,false)">
+                    D) Un navegador web
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =============================
+       ETAPA 3
+    ============================= */
+
+    else if(stage === 2){
+
+        content.innerHTML = `
+
+            <div class="level">
+                ARCHIVO 03 // LAS CUATRO PUERTAS
+            </div>
+
+            <div class="title">
+                LAS LICENCIAS
+            </div>
+
+            <div class="text">
+
+                El laboratorio cambia.
+
+                <br><br>
+
+                Frente a ti aparecen cuatro puertas.
+
+                <br><br>
+
+                Cada una representa una forma
+                diferente de distribuir o licenciar
+                software.
+
+                <br><br>
+
+                Para avanzar debes reconocer
+                cuáles permiten determinadas
+                libertades sobre el código.
+
+            </div>
+
+            <div class="doors">
+
+                <button class="door"
+                    onclick="licenseAnswer('open')">
+
+                    <div class="door-icon">
+                        🔓
+                    </div>
+
+                    <div class="door-name">
+                        CÓDIGO ABIERTO
+                    </div>
+
+                    <small>
+                        OPEN SOURCE
+                    </small>
+
+                </button>
+
+
+                <button class="door"
+                    onclick="licenseAnswer('prop')">
+
+                    <div class="door-icon">
+                        🔐
+                    </div>
+
+                    <div class="door-name">
+                        PROPIETARIA
+                    </div>
+
+                    <small>
+                        RESTRINGIDA
+                    </small>
+
+                </button>
+
+
+                <button class="door"
+                    onclick="licenseAnswer('free')">
+
+                    <div class="door-icon">
+                        🆓
+                    </div>
+
+                    <div class="door-name">
+                        FREEWARE
+                    </div>
+
+                    <small>
+                        GRATUITA
+                    </small>
+
+                </button>
+
+
+                <button class="door"
+                    onclick="licenseAnswer('libre')">
+
+                    <div class="door-icon">
+                        ⚖️
+                    </div>
+
+                    <div class="door-name">
+                        SOFTWARE LIBRE
+                    </div>
+
+                    <small>
+                        LIBERTAD
+                    </small>
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =============================
+       ETAPA 4
+    ============================= */
+
+    else if(stage === 3){
+
+        content.innerHTML = `
+
+            <div class="level">
+                ARCHIVO FINAL // DECISIÓN
+            </div>
+
+            <div class="title">
+                LA ÚLTIMA DECISIÓN
+            </div>
+
+            <div class="text">
+
+                La pantalla comienza a parpadear.
+
+                <br><br>
+
+                El sistema te da una última pista:
+
+            </div>
+
+            <div class="clue">
+
+                <strong>
+                    "NO EXISTE UNA LICENCIA
+                    PERFECTA PARA TODO."
+                </strong>
+
+                <br><br>
+
+                La licencia adecuada depende
+                del proyecto, del nivel de control,
+                de las libertades que se quieran
+                ofrecer y de las condiciones
+                establecidas.
+
+            </div>
+
+            <div class="text">
+
+                Imagina que desarrollaste un programa
+                y quieres que otras personas puedan
+                estudiar, modificar y compartir
+                su código.
+
+                <br><br>
+
+                ¿Qué opción sería más adecuada?
+
+            </div>
+
+            <div class="choices">
+
+                <button class="choice"
+                    onclick="finalAnswer(true)">
+                    A) Una licencia libre
+                    o de código abierto
+                </button>
+
+                <button class="choice"
+                    onclick="finalAnswer(false)">
+                    B) Una licencia que prohíba
+                    modificar el código
+                </button>
+
+                <button class="choice"
+                    onclick="finalAnswer(false)">
+                    C) No utilizar ninguna licencia
+                </button>
+
+                <button class="choice"
+                    onclick="finalAnswer(false)">
+                    D) Elegir cualquier licencia
+                    sin leer sus condiciones
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =================================
+   RESPUESTAS ETAPAS 1 Y 2
+================================= */
+
+function answer(question,correct){
+
+    if(correct){
+
+        score += 100;
+
+        successEffect();
+
+        setTimeout(function(){
+
+            stage++;
+
+            showStage();
+
+        },700);
+
+    }
+
+    else{
+
+        wrongAnswer();
+
+    }
+
+}
+
+
+/* =================================
+   RESPUESTA DE LICENCIAS
+================================= */
+
+function licenseAnswer(type){
+
+    /*
+       Para el objetivo de esta misión,
+       las opciones correctas son:
+
+       Open Source
+       Software Libre
+
+       Freeware significa principalmente
+       que el software se distribuye gratis,
+       pero no necesariamente permite modificar
+       el código.
+
+       Propietaria normalmente mantiene
+       restricciones sobre el código.
+    */
+
+    if(type === "open" || type === "libre"){
+
+        score += 150;
+
+        successEffect();
+
+        setTimeout(function(){
+
+            stage++;
+
+            showStage();
+
+        },700);
+
+    }
+
+    else{
+
+        wrongAnswer();
+
+    }
+
+}
+
+
+/* =================================
+   RESPUESTA FINAL
+================================= */
+
+function finalAnswer(correct){
+
+    if(correct){
+
+        score += 250;
+
+        clearInterval(timer);
+
+        finish(
+
+            "🏆",
+
+            "HAS ESCAPADO",
+
+            "Has conseguido salir del laboratorio.\n\n" +
+
+            "Aprendiste que el software está formado " +
+            "por programas e instrucciones; que una " +
+            "licencia establece las condiciones de uso " +
+            "y distribución; y que existen diferentes " +
+            "tipos de licencias.\n\n" +
+
+            "Para un proyecto que busca permitir estudiar, " +
+            "modificar y compartir el código, una licencia " +
+            "libre o de código abierto puede ser adecuada, " +
+            "dependiendo de sus condiciones específicas.\n\n" +
+
+            "PUNTAJE FINAL: " + score
+
+        );
+
+    }
+
+    else{
+
+        wrongAnswer();
+
+    }
+
+}
+
+
+/* =================================
+   RESPUESTA INCORRECTA
+================================= */
+
+function wrongAnswer(){
+
+    lives--;
 
     document.getElementById("lives")
         .textContent = lives;
 
-
     if(lives <= 0){
 
-        endGame(
-            "☠",
+        finish(
+
+            "☠️",
+
             "EL SISTEMA TE ENCONTRÓ",
-            "Tus errores fueron demasiados.\n\nEl laboratorio permanecerá cerrado... pero algo ha salido del computador."
+
+            "Has perdido todas tus vidas.\n\n" +
+            "El sistema ha tomado el control " +
+            "del laboratorio.\n\n" +
+            "Tal vez la próxima vez puedas escapar."
+
         );
+
+        return;
 
     }
 
-}
+    showJumpscare();
 
+    const content =
+        document.getElementById("content");
 
-/* =========================
-   ETAPAS
-========================= */
+    content.innerHTML = `
 
-function showStage(){
+        <div class="feedback">
 
-const content =
-document.getElementById("gameContent");
+            <div class="feedback-icon">
+                ⚠️
+            </div>
 
+            <h2>
+                RESPUESTA INCORRECTA
+            </h2>
 
-/* ---------- ETAPA 1 ---------- */
+            <p>
 
-if(currentStage === 0){
+                El sistema ha registrado tu error.
 
-content.innerHTML = `
+                <br><br>
 
-<div class="level">
-ARCHIVO 01 // IDENTIDAD DEL SISTEMA
-</div>
+                Has perdido una vida.
 
-<div class="glitch-title">
-¿QUÉ ESTÁ HACIENDO FUNCIONAR ESTA MÁQUINA?
-</div>
+                <br><br>
 
-<div class="message">
+                Algo acaba de moverse
+                detrás de ti...
 
-La pantalla se enciende.
+            </p>
 
-Un cursor parpadea.
+            <br>
 
-El computador parece muerto...
+            <button onclick="showStage()">
+                ⚡ CONTINUAR
+            </button>
 
-pero sus programas siguen funcionando.
+        </div>
 
-</div>
-
-<div class="clue">
-
-<strong>PISTA ENCONTRADA:</strong>
-
-<br><br>
-
-"No puedes tocarme.<br>
-
-No tengo cuerpo.<br>
-
-Pero sin mí, esta máquina sería incapaz
-de ejecutar sus instrucciones."
-
-</div>
-
-<div class="message">
-
-Encuentra la definición correcta.
-
-</div>
-
-<div class="choice-grid">
-
-<button class="choice"
-onclick="answer(true)">
-
-A) Los programas e instrucciones
-que permiten realizar tareas
-
-</button>
-
-<button class="choice"
-onclick="answer(false)">
-
-B) Las partes físicas del computador
-
-</button>
-
-<button class="choice"
-onclick="answer(false)">
-
-C) La electricidad del computador
-
-</button>
-
-<button class="choice"
-onclick="answer(false)">
-
-D) La conexión a Internet
-
-</button>
-
-</div>
-
-`;
+    `;
 
 }
 
 
-/* ---------- ETAPA 2 ---------- */
-
-if(currentStage === 1){
-
-content.innerHTML = `
-
-<div class="level">
-ARCHIVO 02 // DOCUMENTO RESTRINGIDO
-</div>
-
-<div class="glitch-title">
-EL CONTRATO
-</div>
-
-<div class="message">
-
-Has encontrado un documento dentro
-del computador.
-
-Está cubierto de manchas oscuras.
-
-En la pantalla solamente puede leerse:
-
-</div>
-
-<div class="clue">
-
-<strong>
-"PUEDES USARME..."
-</strong>
-
-<br><br>
-
-"...pero alguien decidió qué puedes hacer
-conmigo, cómo puedes utilizarme
-y bajo qué condiciones."
-
-</div>
-
-<div class="message">
-
-¿Qué concepto describe mejor
-este documento?
-
-</div>
-
-<div class="choice-grid">
-
-<button class="choice"
-onclick="answer(true)">
-
-A) Una licencia de software
-
-</button>
-
-<button class="choice"
-onclick="answer(false)">
-
-B) Una contraseña
-
-</button>
-
-<button class="choice"
-onclick="answer(false)">
-
-C) Un virus informático
-
-</button>
-
-<button class="choice"
-onclick="answer(false)">
-
-D) Un sistema operativo
-
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* ---------- ETAPA 3 ---------- */
-
-if(currentStage === 2){
-
-content.innerHTML = `
-
-<div class="level">
-ARCHIVO 03 // LAS CUATRO PUERTAS
-</div>
-
-<div class="glitch-title">
-ELIGE EL CAMINO
-</div>
-
-<div class="message">
-
-El laboratorio cambia.
-
-Frente a ti aparecen cuatro puertas.
-
-Cada una representa un tipo de licencia
-o modelo de distribución.
-
-Solo algunas te permitirán continuar.
-
-</div>
-
-<div class="doors">
-
-<button class="door"
-onclick="licenseChoice('open')">
-
-<div class="icon">🔓</div>
-
-<div class="door-title">
-CÓDIGO ABIERTO
-</div>
-
-<small>OPEN SOURCE</small>
-
-</button>
-
-
-<button class="door"
-onclick="licenseChoice('prop')">
-
-<div class="icon">🔐</div>
-
-<div class="door-title">
-PROPIETARIA
-</div>
-
-<small>RESTRINGIDA</small>
-
-</button>
-
-
-<button class="door"
-onclick="licenseChoice('free')">
-
-<div class="icon">🆓</div>
-
-<div class="door-title">
-FREEWARE
-</div>
-
-<small>GRATUITA</small>
-
-</button>
-
-
-<button class="door"
-onclick="licenseChoice('libre')">
-
-<div class="icon">⚖️</div>
-
-<div class="door-title">
-SOFTWARE LIBRE
-</div>
-
-<small>LIBERTAD</small>
-
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* ---------- ETAPA 4 ---------- */
-
-if(currentStage === 3){
-
-content.innerHTML = `
-
-<div class="level">
-ARCHIVO FINAL // DECISIÓN
-</div>
-
-<div class="glitch-title">
-EL SISTEMA TE HACE UNA OFERTA
-</div>
-
-<div class="message">
-
-El computador comienza a emitir
-un sonido extraño.
-
-Una última pantalla aparece:
-
-</div>
-
-<div class="clue">
-
-<strong>
-"NO EXISTE UNA LICENCIA PERFECTA PARA TODO."
-</strong>
-
-<br><br>
-
-La elección depende del proyecto,
-de las libertades que quieras ofrecer,
-del control que necesites y de las
-condiciones de la licencia.
-
-</div>
-
-<div class="message">
-
-¿Qué opción sería más adecuada
-para un proyecto donde se quiere permitir
-que otras personas estudien, modifiquen
-y compartan el código?
-
-</div>
-
-<div class="choice-grid">
-
-<button class="choice"
-onclick="finalChoice(true)">
-
-A) Una licencia libre
-o de código abierto
-
-</button>
-
-<button class="choice"
-onclick="finalChoice(false)">
-
-B) Una licencia que prohíba
-modificar el código
-
-</button>
-
-<button class="choice"
-onclick="finalChoice(false)">
-
-C) No utilizar ninguna licencia
-
-</button>
-
-<button class="choice"
-onclick="finalChoice(false)">
-
-D) Elegir cualquier licencia
-sin revisar sus condiciones
-
-</button>
-
-</div>
-
-`;
-
-}
-
-}
-
-
-/* =========================
-   RESPUESTAS
-========================= */
-
-function answer(correct){
-
-if(correct){
-
-score += 100;
-
-flashSuccess();
-
-setTimeout(function(){
-
-currentStage++;
-
-showStage();
-
-},700);
-
-}
-
-else{
-
-loseLife();
-
-if(lives > 0){
-
-setTimeout(showStage,900);
-
-}
-
-}
-
-}
-
-
-/* =========================
-   TIPOS DE LICENCIA
-========================= */
-
-function licenseChoice(choice){
-
-if(
-choice === "open" ||
-choice === "libre"
-){
-
-score += 150;
-
-flashSuccess();
-
-setTimeout(function(){
-
-currentStage++;
-
-showStage();
-
-},700);
-
-}
-
-else{
-
-loseLife();
-
-if(lives > 0){
-
-setTimeout(showStage,900);
-
-}
-
-}
-
-}
-
-
-/* =========================
-   RESPUESTA FINAL
-========================= */
-
-function finalChoice(correct){
-
-if(correct){
-
-score += 250;
-
-clearInterval(timer);
-
-endGame(
-
-"🏆",
-
-"HAS ESCAPADO",
-
-"Has comprendido los secretos del software y las licencias.\n\nUna licencia libre o de código abierto puede ser adecuada cuando el objetivo es permitir estudiar, modificar y compartir el software, siempre dependiendo de las condiciones específicas de la licencia.\n\nPUNTAJE FINAL: " + score
-
-);
-
-}
-
-else{
-
-loseLife();
-
-if(lives > 0){
-
-setTimeout(showStage,900);
-
-}
-
-}
-
-}
-
-
-/* =========================
-   PERDER VIDA
-========================= */
-
-function loseLife(){
-
-lives--;
-
-updateLives();
-
-if(lives > 0){
-
-showJumpscare();
-
-}
-
-}
-
-
-/* =========================
+/* =================================
    SUSTO
-========================= */
+================================= */
 
 function showJumpscare(){
 
-const scare =
-document.getElementById("jumpscare");
+    const scare =
+        document.getElementById("jumpscare");
 
-scare.classList.add("active");
+    scare.classList.add("show");
 
-setTimeout(function(){
+    setTimeout(function(){
 
-scare.classList.remove("active");
+        scare.classList.remove("show");
 
-},600);
+    },650);
 
 }
 
 
-/* =========================
+/* =================================
    EFECTO CORRECTO
-========================= */
+================================= */
 
-function flashSuccess(){
+function successEffect(){
 
-const alert =
-document.getElementById("alert");
+    const alert =
+        document.getElementById("alert");
 
-alert.style.background =
-"rgba(0,255,80,.12)";
+    alert.style.background =
+        "rgba(0,255,80,.10)";
 
-alert.style.opacity = "1";
+    alert.style.opacity = "1";
 
-setTimeout(function(){
+    setTimeout(function(){
 
-alert.style.opacity = "0";
+        alert.style.opacity = "0";
 
-alert.style.background =
-"rgba(80,0,0,.15)";
+        alert.style.background =
+            "rgba(255,0,0,.10)";
 
-},350);
-
-}
-
-
-/* =========================
-   FINAL
-========================= */
-
-function endGame(icon,title,text){
-
-clearInterval(timer);
-
-document.getElementById("game")
-.classList.remove("active");
-
-document.getElementById("final")
-.classList.add("active");
-
-document.getElementById("finalIcon")
-.textContent = icon;
-
-document.getElementById("finalTitle")
-.textContent = title;
-
-document.getElementById("finalText")
-.textContent = text;
+    },350);
 
 }
 
 
-/* =========================
-   ENTER
-========================= */
+/* =================================
+   FINAL DEL JUEGO
+================================= */
+
+function finish(icon,title,text){
+
+    clearInterval(timer);
+
+    document
+        .getElementById("game")
+        .classList.remove("active");
+
+    document
+        .getElementById("final")
+        .classList.add("active");
+
+    document
+        .getElementById("finalIcon")
+        .textContent = icon;
+
+    document
+        .getElementById("finalTitle")
+        .textContent = title;
+
+    document
+        .getElementById("finalText")
+        .textContent = text;
+
+}
+
+
+/* =================================
+   ENTER PARA COMENZAR
+================================= */
 
 document.addEventListener(
-"keydown",
-function(event){
+    "keydown",
+    function(event){
 
-if(
-event.key === "Enter" &&
-document.getElementById("intro")
-.classList.contains("active")
-){
+        if(
+            event.key === "Enter" &&
+            document
+                .getElementById("intro")
+                .classList.contains("active")
+        ){
 
-startGame();
+            startGame();
 
-}
+        }
 
-});
+    }
+);
 
 </script>
 
 </body>
 </html>
+```
