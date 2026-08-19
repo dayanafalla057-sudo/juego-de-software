@@ -1,15 +1,13 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EL CÓDIGO MALDITO</title>
+<title>El Código Maldito</title>
 
 <style>
-
-/* =========================================================
-   CONFIGURACIÓN GENERAL
-========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Share+Tech+Mono&display=swap');
 
 *{
     box-sizing:border-box;
@@ -17,40 +15,32 @@
     padding:0;
 }
 
-html,body{
-    width:100%;
-    height:100%;
-}
-
 body{
     background:#020303;
     color:#d8ffd8;
-    font-family:"Courier New",monospace;
+    font-family:'Share Tech Mono',monospace;
+    min-height:100vh;
     overflow:hidden;
 }
 
-/* CRT */
-
-body:after{
+/* EFECTO DE PANTALLA */
+body::before{
     content:"";
     position:fixed;
     inset:0;
+    z-index:50;
     pointer-events:none;
-    z-index:999;
+    opacity:.35;
     background:
-    repeating-linear-gradient(
-        0deg,
-        rgba(255,255,255,.025) 0px,
-        rgba(255,255,255,.025) 1px,
-        transparent 2px,
-        transparent 4px
-    );
-    mix-blend-mode:screen;
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.025) 4px
+        );
 }
 
-/* =========================================================
-   PANTALLAS
-========================================================= */
+/* PANTALLAS */
 
 .screen{
     position:fixed;
@@ -58,6 +48,7 @@ body:after{
     display:none;
     justify-content:center;
     align-items:center;
+    padding:20px;
     z-index:10;
 }
 
@@ -65,332 +56,313 @@ body:after{
     display:flex;
 }
 
-/* =========================================================
-   INTRO
-========================================================= */
+/* INTRO */
 
 #intro{
     background:
-    radial-gradient(circle at center,#123b1c 0%,#020303 60%);
+        radial-gradient(circle at center,rgba(30,80,40,.20),transparent 45%),
+        radial-gradient(circle at 80% 20%,rgba(120,0,0,.15),transparent 30%),
+        #020303;
 }
 
-.introBox{
-    width:900px;
-    max-width:94%;
-    padding:45px;
+.intro-box{
+    width:min(850px,95%);
     text-align:center;
-    border:1px solid #42ff69;
+    padding:40px;
+    border:1px solid #285335;
     background:rgba(2,9,5,.96);
     box-shadow:
-    0 0 40px rgba(0,255,70,.15),
-    inset 0 0 30px rgba(0,255,70,.04);
+        0 0 40px rgba(0,255,100,.08),
+        inset 0 0 40px rgba(0,255,100,.03);
 }
 
 .warning{
-    color:#ff2424;
-    letter-spacing:5px;
-    animation:flicker 1.4s infinite;
+    color:#ff3333;
+    font-size:14px;
+    letter-spacing:4px;
     margin-bottom:20px;
+    animation:flicker 1.5s infinite;
 }
 
-.logo{
-    color:#5cff78;
-    font-size:clamp(45px,8vw,85px);
+h1{
+    font-family:'Creepster',cursive;
+    font-size:clamp(55px,9vw,100px);
+    color:#b8ffbe;
+    letter-spacing:4px;
     text-shadow:
-    0 0 10px #22ff4d,
-    0 0 30px #0a6b20;
-    margin-bottom:15px;
+        0 0 8px #5cff75,
+        0 0 25px #0e7130;
 }
 
 .subtitle{
-    color:#82ff9a;
-    letter-spacing:3px;
-    margin-bottom:30px;
+    margin:15px 0 25px;
+    color:#5cff78;
 }
 
 .story{
-    color:#aab7ad;
-    line-height:1.9;
-    font-size:16px;
+    max-width:650px;
+    margin:auto;
+    color:#aeb8b0;
+    line-height:1.8;
 }
 
-.story strong{
-    color:#ff3434;
-}
-
-.startButton{
+.start{
     margin-top:30px;
-    padding:18px 40px;
+    padding:17px 40px;
     font-size:18px;
 }
 
-/* =========================================================
-   JUEGO
-========================================================= */
+/* BOTONES */
+
+button{
+    font-family:'Share Tech Mono',monospace;
+    cursor:pointer;
+    color:#c5ffd0;
+    background:#061009;
+    border:1px solid #376f45;
+    padding:15px 20px;
+    transition:.2s;
+}
+
+button:hover{
+    color:white;
+    border-color:#5cff78;
+    background:#0d2614;
+    box-shadow:0 0 20px rgba(92,255,120,.2);
+    transform:translateY(-2px);
+}
+
+/* JUEGO */
 
 #game{
+    padding:0;
     align-items:stretch;
+    background:#010202;
 }
 
 .game{
     width:100%;
-    height:100%;
+    height:100vh;
     display:flex;
     flex-direction:column;
 }
 
-/* HEADER */
-
 .header{
     height:70px;
-    min-height:70px;
+    flex-shrink:0;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 20px;
-    background:#030806;
-    border-bottom:1px solid #234c2b;
+    padding:0 25px;
+    border-bottom:1px solid #243c2a;
+    background:#030705;
     position:relative;
 }
 
-.systemName{
-    color:#4cff70;
-    font-size:14px;
+.logo{
+    color:#5cff78;
+    font-size:16px;
 }
 
 .stats{
     display:flex;
+    gap:25px;
     align-items:center;
-    gap:20px;
 }
 
 .timer{
     color:#ff4545;
-    font-size:19px;
+    font-size:21px;
 }
 
-.timer.danger{
-    animation:dangerBlink .45s infinite;
+.timer.warning{
+    animation:blink .5s infinite;
 }
 
 .lives{
-    color:#ff4444;
-    font-size:20px;
-}
-
-.threat{
-    color:#ff7070;
-    font-size:13px;
-}
-
-.threatBar{
-    width:100px;
-    height:8px;
-    border:1px solid #512323;
-    display:inline-block;
-    margin-left:5px;
-}
-
-.threatFill{
-    height:100%;
-    width:0%;
-    background:#ff2020;
-    transition:.4s;
+    color:#ff6464;
+    font-size:18px;
 }
 
 .progress{
     position:absolute;
-    left:0;
     bottom:0;
+    left:0;
     height:3px;
-    background:#4cff70;
     width:100%;
+    background:#5cff78;
+    transition:width 1s linear;
 }
 
-/* =========================================================
-   CONTENIDO
-========================================================= */
-
-.gameArea{
+.area{
     flex:1;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:15px;
+    padding:20px;
     overflow:auto;
 }
 
 .terminal{
-    width:1000px;
-    max-width:100%;
-    max-height:95%;
-    overflow:auto;
-    border:1px solid #285734;
+    width:min(950px,100%);
+    min-height:470px;
+    border:1px solid #285235;
     background:#030806;
-    box-shadow:0 0 50px rgba(0,255,80,.08);
+    box-shadow:0 0 50px rgba(0,255,100,.05);
 }
 
-.terminalTop{
-    height:38px;
-    border-bottom:1px solid #23452b;
-    padding:10px 15px;
-    color:#3dff62;
+.terminal-bar{
+    height:40px;
+    border-bottom:1px solid #203a27;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding-left:15px;
+}
+
+.dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#555;
 }
 
 .content{
     padding:30px;
 }
 
-.roomTitle{
+.level{
     color:#5cff78;
     font-size:13px;
     margin-bottom:15px;
 }
 
-.bigTitle{
+.title{
+    font-size:28px;
     color:#fff;
-    font-size:30px;
     margin-bottom:20px;
 }
 
-.description{
-    color:#aebbb1;
+.text{
+    color:#aebaae;
     line-height:1.8;
     margin-bottom:20px;
 }
 
 .clue{
-    border-left:4px solid #51ff70;
-    background:#061309;
+    border-left:3px solid #5cff78;
+    background:#061008;
     padding:20px;
-    color:#b6d9bc;
+    color:#acd8b4;
     line-height:1.8;
     margin:20px 0;
 }
 
-.warningBox{
-    border:1px solid #6d2020;
-    background:#180505;
-    color:#ff7b7b;
-    padding:15px;
-    margin:20px 0;
-}
-
-button{
-    font-family:inherit;
-    color:#c8ffd0;
-    background:#061108;
-    border:1px solid #347744;
-    padding:14px 18px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-button:hover{
-    background:#0c2913;
-    border-color:#5cff78;
-    box-shadow:0 0 18px rgba(50,255,100,.25);
-    transform:translateY(-2px);
-}
-
-button:disabled{
-    opacity:.3;
-    cursor:not-allowed;
-    transform:none;
-}
-
-/* OPCIONES */
-
-.options{
+.choices{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:14px;
 }
 
-.option{
-    min-height:75px;
+.choice{
     text-align:left;
+    min-height:70px;
 }
 
-/* =========================================================
-   MAPA
-========================================================= */
+/* PUERTAS */
 
-.map{
+.doors{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:25px;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
 }
 
-.room{
-    min-height:120px;
+.door{
+    min-height:145px;
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     gap:10px;
+    background:#060706;
 }
 
-.room.locked{
-    opacity:.35;
+.door-icon{
+    font-size:42px;
 }
 
-.room.current{
-    border-color:#5cff78;
-    box-shadow:0 0 15px rgba(80,255,110,.2);
+.door-name{
+    color:white;
+    font-size:17px;
 }
 
-.roomIcon{
-    font-size:35px;
-}
+/* MENSAJE */
 
-/* =========================================================
-   INVENTARIO
-========================================================= */
-
-.inventory{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin:15px 0;
-}
-
-.item{
-    border:1px solid #315c39;
-    padding:8px 12px;
-    color:#9cffac;
-}
-
-/* =========================================================
-   CÓDIGO
-========================================================= */
-
-.codeInput{
-    width:100%;
-    max-width:350px;
-    background:#020503;
-    color:#6cff85;
-    border:1px solid #3a7546;
-    padding:16px;
-    font-family:inherit;
-    font-size:20px;
+.feedback{
     text-align:center;
-    letter-spacing:5px;
-    outline:none;
+    padding:45px 20px;
 }
 
-/* =========================================================
-   SUSTO
-========================================================= */
+.feedback-icon{
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+.feedback h2{
+    color:#ff4444;
+    margin-bottom:15px;
+}
+
+.feedback p{
+    color:#aaa;
+    line-height:1.7;
+}
+
+/* FINAL */
+
+#final{
+    background:
+        radial-gradient(circle,rgba(0,80,30,.15),transparent 50%),
+        #020303;
+}
+
+.final-box{
+    width:min(750px,95%);
+    text-align:center;
+    padding:45px;
+    border:1px solid #4cff78;
+    background:#030806;
+    box-shadow:0 0 50px rgba(0,255,100,.08);
+}
+
+.final-icon{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.final-title{
+    font-family:'Creepster',cursive;
+    font-size:60px;
+    color:#baffc2;
+    margin-bottom:20px;
+}
+
+.final-text{
+    color:#aebaae;
+    line-height:1.8;
+    white-space:pre-line;
+    margin-bottom:30px;
+}
+
+/* SUSTO */
 
 .jumpscare{
+    display:none;
     position:fixed;
     inset:0;
-    display:none;
+    z-index:100;
     align-items:center;
     justify-content:center;
-    z-index:500;
     background:#000;
 }
 
@@ -398,1035 +370,356 @@ button:disabled{
     display:flex;
 }
 
-.shadowFace{
-    width:280px;
-    height:420px;
-    background:
-    radial-gradient(
-        ellipse at center,
-        #3c3c3c 0%,
-        #181818 45%,
-        #000 75%
-    );
-    border-radius:48% 48% 35% 35%;
-    position:relative;
-    box-shadow:0 0 80px #000;
-    animation:shake .07s infinite;
+.eye{
+    font-size:min(35vw,260px);
+    animation:shake .08s infinite;
 }
 
-.noEye{
-    position:absolute;
-    top:120px;
-    width:65px;
-    height:35px;
-    background:#000;
-    border-radius:50%;
+/* ALERTA */
+
+.alert{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:40;
+    opacity:0;
+    background:rgba(255,0,0,.10);
 }
 
-.noEye.left{
-    left:55px;
+.alert.active{
+    animation:redAlert .6s infinite;
 }
 
-.noEye.right{
-    right:55px;
-}
-
-.mouth{
-    position:absolute;
-    bottom:80px;
-    left:70px;
-    right:70px;
-    height:100px;
-    background:#000;
-    border-radius:50%;
-}
-
-.scar{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    top:30px;
-    color:#ff1111;
-    font-size:17px;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-/* =========================================================
-   FINAL
-========================================================= */
-
-#final{
-    background:
-    radial-gradient(circle,#190303 0%,#000 60%);
-}
-
-.finalBox{
-    width:900px;
-    max-width:95%;
-    text-align:center;
-}
-
-.finalMonster{
-    position:relative;
-    width:240px;
-    height:350px;
-    margin:0 auto 25px;
-    background:
-    radial-gradient(
-        ellipse at center,
-        #454545 0%,
-        #191919 50%,
-        #000 80%
-    );
-    border-radius:50% 50% 35% 35%;
-    box-shadow:0 0 100px #000;
-    animation:monsterMove 2s infinite alternate;
-}
-
-.finalMonster:before,
-.finalMonster:after{
-    content:"";
-    position:absolute;
-    top:90px;
-    width:65px;
-    height:45px;
-    background:#000;
-    border-radius:50%;
-}
-
-.finalMonster:before{
-    left:45px;
-}
-
-.finalMonster:after{
-    right:45px;
-}
-
-.finalMouth{
-    position:absolute;
-    bottom:65px;
-    left:60px;
-    right:60px;
-    height:100px;
-    background:#000;
-    border-radius:50%;
-}
-
-.forehead{
-    position:absolute;
-    top:25px;
-    left:0;
-    right:0;
-    text-align:center;
-    color:#ff1111;
-    font-weight:bold;
-    font-size:21px;
-    text-shadow:0 0 10px red;
-}
-
-.failTitle{
-    color:#ff1010;
-    font-size:65px;
-    font-weight:bold;
-    text-shadow:0 0 20px red;
-}
-
-.successTitle{
-    color:#5cff78;
-    font-size:60px;
-    text-shadow:0 0 20px #1aff49;
-}
-
-.finalText{
-    color:#aaa;
-    line-height:1.8;
-    white-space:pre-line;
-    margin:20px 0;
-}
-
-/* =========================================================
-   ANIMACIONES
-========================================================= */
+/* ANIMACIONES */
 
 @keyframes flicker{
-    0%,18%,22%,100%{opacity:1}
-    20%,21%{opacity:.2}
+    0%,18%,22%,70%,100%{opacity:1}
+    20%,21%,69%{opacity:.2}
 }
 
-@keyframes dangerBlink{
+@keyframes blink{
     50%{opacity:.2}
 }
 
+@keyframes redAlert{
+    0%,100%{opacity:0}
+    50%{opacity:1}
+}
+
 @keyframes shake{
-    0%{transform:translate(5px,2px) rotate(1deg)}
-    50%{transform:translate(-5px,-3px) rotate(-1deg)}
-    100%{transform:translate(3px,4px)}
+    0%{transform:translate(4px,2px)}
+    50%{transform:translate(-4px,-3px)}
+    100%{transform:translate(2px,4px)}
 }
 
-@keyframes monsterMove{
-    from{transform:scale(1)}
-    to{transform:scale(1.08) translateY(-5px)}
-}
+/* CELULAR */
 
-/* =========================================================
-   MÓVIL
-========================================================= */
-
-@media(max-width:700px){
+@media(max-width:650px){
 
     body{
         overflow:auto;
     }
 
     .header{
-        height:auto;
-        min-height:75px;
-        flex-wrap:wrap;
-        gap:7px;
-        padding:10px;
+        height:65px;
+        padding:0 12px;
     }
 
-    .systemName{
-        font-size:9px;
+    .logo{
+        font-size:10px;
     }
 
     .stats{
-        gap:8px;
-        font-size:11px;
+        gap:10px;
+        font-size:12px;
     }
 
-    .threatBar{
-        width:60px;
-    }
-
-    .gameArea{
+    .area{
         align-items:flex-start;
-        padding:8px;
+        padding:10px;
+    }
+
+    .terminal{
+        margin-top:10px;
     }
 
     .content{
         padding:20px;
     }
 
-    .bigTitle{
-        font-size:23px;
-    }
-
-    .options{
+    .choices,
+    .doors{
         grid-template-columns:1fr;
     }
 
-    .map{
-        grid-template-columns:1fr 1fr;
+    .title{
+        font-size:22px;
     }
 
-    .finalMonster{
-        width:160px;
-        height:250px;
+    .final-title{
+        font-size:45px;
     }
 
-    .failTitle{
-        font-size:42px;
+    .intro-box{
+        padding:25px 18px;
     }
-
 }
-
 </style>
 </head>
 
 <body>
 
-
-<!-- =====================================================
-     INTRO
-===================================================== -->
+<!-- ===============================
+     INTRODUCCIÓN
+================================ -->
 
 <section id="intro" class="screen active">
 
-<div class="introBox">
+    <div class="intro-box">
 
-<div class="warning">
-⚠ SISTEMA COMPROMETIDO ⚠
-</div>
+        <div class="warning">
+            ⚠ SISTEMA COMPROMETIDO ⚠
+        </div>
 
-<div class="logo">
-EL CÓDIGO MALDITO
-</div>
+        <h1>EL CÓDIGO MALDITO</h1>
 
-<div class="subtitle">
-ESCAPE ROOM // TERROR TECNOLÓGICO
-</div>
+        <div class="subtitle">
+            EXPERIENCIA DE TERROR TECNOLÓGICO
+        </div>
 
-<div class="story">
+        <div class="story">
 
-Son las <strong>03:17 AM</strong>.
+            Son las 03:17 AM.
 
-<br><br>
+            <br><br>
 
-Has encontrado un laboratorio informático abandonado.
+            Has entrado a un antiguo laboratorio
+            informático abandonado.
 
-<br><br>
+            <br><br>
 
-Un computador sigue funcionando.
+            Un computador todavía está encendido.
 
-<br><br>
+            <br><br>
 
-Al tocar el teclado aparece:
+            Cuando tocas el teclado aparece:
 
-<br><br>
+            <br><br>
 
-<strong>
-"NO DEBISTE DESPERTAR EL SISTEMA."
-</strong>
+            <strong style="color:#ff3333">
+            "NO DEBISTE DESPERTAR EL SISTEMA."
+            </strong>
 
-<br><br>
+            <br><br>
 
-El sistema te ha encerrado.
+            Tienes <strong>5 minutos</strong>.
 
-<br><br>
+            <br><br>
 
-❤️ Tienes solamente <strong>2 vidas</strong>.
+            No encontrarás preguntas normales.
 
-<br>
+            <br>
 
-⏱ Tienes solamente <strong>5 minutos</strong>.
+            Tendrás que descubrir las respuestas
+            mediante pistas.
 
-<br><br>
+        </div>
 
-Las preguntas no aparecerán como un examen.
+        <button class="start" onclick="startGame()">
+            ▶ ENTRAR AL SISTEMA
+        </button>
 
-<br>
-
-Tendrás que explorar, encontrar pistas,
-descifrar códigos y tomar decisiones.
-
-<br><br>
-
-<strong>
-SI TE EQUIVOCAS, ÉL SE ACERCA.
-</strong>
-
-</div>
-
-<button
-class="startButton"
-onclick="startGame()">
-
-▶ DESPERTAR EL SISTEMA
-
-</button>
-
-</div>
+    </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- ===============================
      JUEGO
-===================================================== -->
+================================ -->
 
 <section id="game" class="screen">
 
 <div class="game">
 
-<header class="header">
+    <header class="header">
 
-<div class="systemName">
-[SISTEMA // EL_CODIGO_MALDITO]
-</div>
+        <div class="logo">
+            [ SISTEMA // CODIGO_MALDITO ]
+        </div>
 
-<div class="stats">
+        <div class="stats">
 
-<div class="timer" id="timer">
-⏱ <span id="time">05:00</span>
-</div>
+            <div id="timer" class="timer">
+                ⏱ <span id="time">05:00</span>
+            </div>
 
-<div class="lives">
-❤️ <span id="lives">2</span>
-</div>
+            <div class="lives">
+                ♥ <span id="lives">3</span>
+            </div>
 
-<div class="threat">
+        </div>
 
-AMENAZA:
+        <div id="progress" class="progress"></div>
 
-<span class="threatBar">
-<span id="threatFill" class="threatFill"></span>
-</span>
-
-<span id="threatNumber">0%</span>
-
-</div>
-
-</div>
-
-<div
-id="progress"
-class="progress">
-</div>
-
-</header>
+    </header>
 
 
-<div class="gameArea">
+    <main class="area">
 
-<div class="terminal">
+        <div class="terminal">
 
-<div class="terminalTop">
-● ● ● &nbsp; TERMINAL ACTIVO
-</div>
+            <div class="terminal-bar">
 
-<div id="content" class="content">
-</div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
 
-</div>
+            </div>
 
-</div>
+            <div id="content" class="content"></div>
+
+        </div>
+
+    </main>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     SUSTO
-===================================================== -->
-
-<div
-id="jumpscare"
-class="jumpscare">
-
-<div class="shadowFace">
-
-<div class="scar">
-¿ME PUEDES VER?
-</div>
-
-<div class="noEye left"></div>
-<div class="noEye right"></div>
-
-<div class="mouth"></div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
+<!-- ===============================
      FINAL
-===================================================== -->
+================================ -->
 
 <section id="final" class="screen">
 
-<div class="finalBox">
+    <div class="final-box">
 
-<div id="monster" class="finalMonster">
+        <div id="finalIcon" class="final-icon">
+            ☠️
+        </div>
 
-<div class="forehead">
-FRACASASTE
-</div>
+        <div id="finalTitle" class="final-title">
+            SISTEMA BLOQUEADO
+        </div>
 
-<div class="finalMouth">
-</div>
+        <div id="finalText" class="final-text"></div>
 
-</div>
+        <button onclick="location.reload()">
+            ↻ JUGAR DE NUEVO
+        </button>
 
-<div id="finalTitle"
-class="failTitle">
-FRACASASTE
-</div>
-
-<div id="finalText"
-class="finalText">
-</div>
-
-<button onclick="location.reload()">
-↻ VOLVER A INTENTAR
-</button>
-
-</div>
+    </div>
 
 </section>
+
+
+<!-- SUSTO -->
+
+<div id="jumpscare" class="jumpscare">
+
+    <div class="eye">
+        👁️
+    </div>
+
+</div>
+
+
+<!-- ALERTA -->
+
+<div id="alert" class="alert"></div>
 
 
 <script>
 
-/* =========================================================
-   VARIABLES DEL JUEGO
-========================================================= */
+/* =================================
+   CONFIGURACIÓN
+================================= */
 
-let vidas = 2;
+const TOTAL_TIME = 300;
 
-let tiempo = 300;
+let time = TOTAL_TIME;
 
-let amenaza = 0;
+let lives = 3;
 
-let puntaje = 0;
+let score = 0;
 
-let habitacion = 0;
+let stage = 0;
 
-let intervalo;
+let timer;
 
-let jugando = false;
 
-let inventario = [];
-
-
-/* =========================================================
-   SONIDOS
-   Se generan mediante Web Audio.
-   No necesitas descargar archivos.
-========================================================= */
-
-let audioContext;
-
-function iniciarAudio(){
-
-    if(!audioContext){
-
-        audioContext =
-        new (
-        window.AudioContext ||
-        window.webkitAudioContext
-        )();
-
-    }
-
-    if(audioContext.state==="suspended"){
-        audioContext.resume();
-    }
-}
-
-
-/* Sonido simple */
-
-function beep(
-frequency=440,
-duration=.15,
-type="square",
-volume=.04
-){
-
-    if(!audioContext)return;
-
-    const oscillator =
-    audioContext.createOscillator();
-
-    const gain =
-    audioContext.createGain();
-
-    oscillator.type=type;
-
-    oscillator.frequency.value=frequency;
-
-    gain.gain.setValueAtTime(
-        volume,
-        audioContext.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        .001,
-        audioContext.currentTime+duration
-    );
-
-    oscillator.connect(gain);
-
-    gain.connect(audioContext.destination);
-
-    oscillator.start();
-
-    oscillator.stop(
-        audioContext.currentTime+duration
-    );
-}
-
-
-/* Sonido de error */
-
-function sonidoError(){
-
-    beep(100,.3,"sawtooth",.08);
-
-    setTimeout(
-        ()=>beep(55,.5,"sawtooth",.08),
-        100
-    );
-
-}
-
-
-/* Sonido correcto */
-
-function sonidoCorrecto(){
-
-    beep(440,.1,"sine",.05);
-
-    setTimeout(
-        ()=>beep(660,.15,"sine",.05),
-        100
-    );
-
-}
-
-
-/* Sonido de pasos */
-
-function pasos(){
-
-    beep(90,.12,"sine",.03);
-
-    setTimeout(
-        ()=>beep(70,.12,"sine",.03),
-        180
-    );
-
-}
-
-
-/* Sonido de alarma */
-
-function alarma(){
-
-    beep(600,.15,"square",.05);
-
-    setTimeout(
-        ()=>beep(300,.15,"square",.05),
-        170
-    );
-
-}
-
-
-/* =========================================================
-   PREGUNTAS / HABITACIONES
-========================================================= */
-
-const habitaciones=[
-
-{
-
-nombre:"SALA DE SERVIDORES",
-
-icon:"🖥️",
-
-tipo:"pregunta",
-
-titulo:"LA MÁQUINA INVISIBLE",
-
-descripcion:
-"Los servidores están encendidos. Las luces parpadean. Una pantalla comienza a escribir sola.",
-
-pista:
-"NO TENGO CUERPO. NO PUEDES TOCARME. SIN MÍ, ESTA MÁQUINA NO PODRÍA EJECUTAR SUS INSTRUCCIONES.",
-
-pregunta:
-"¿Qué está describiendo el sistema?",
-
-opciones:[
-"Software",
-"Hardware",
-"Electricidad",
-"Internet"
-],
-
-correcta:0
-
-},
-
-{
-
-nombre:"SALA DE HARDWARE",
-
-icon:"🔧",
-
-tipo:"pregunta",
-
-titulo:"EL OBJETO QUE NO EXISTE",
-
-descripcion:
-"Hay cuatro objetos sobre una mesa. Tres puedes tocar. Uno pertenece al mundo invisible.",
-
-pista:
-"UNO DE ELLOS ESTÁ FORMADO POR PROGRAMAS E INSTRUCCIONES.",
-
-pregunta:
-"¿Cuál corresponde al software?",
-
-opciones:[
-"Teclado",
-"Monitor",
-"Sistema operativo",
-"Procesador"
-],
-
-correcta:2
-
-},
-
-{
-
-nombre:"ARCHIVO PROHIBIDO",
-
-icon:"📁",
-
-tipo:"pregunta",
-
-titulo:"EL ARCHIVO QUE RESPIRA",
-
-descripcion:
-"Un archivo aparece y desaparece de la pantalla.",
-
-pista:
-"SOY UN CONJUNTO DE PROGRAMAS, DATOS E INSTRUCCIONES QUE PERMITEN REALIZAR TAREAS.",
-
-pregunta:
-"¿Qué concepto representa?",
-
-opciones:[
-"Software",
-"Hardware",
-"CPU",
-"Memoria"
-],
-
-correcta:0
-
-},
-
-{
-
-nombre:"SALA DE LICENCIAS",
-
-icon:"📜",
-
-tipo:"pregunta",
-
-titulo:"EL CONTRATO",
-
-descripcion:
-"Encuentras un documento digital. Está lleno de reglas.",
-
-pista:
-"NO SOY EL PROGRAMA. ESTABLEZCO LAS CONDICIONES BAJO LAS CUALES PUEDES UTILIZARLO.",
-
-pregunta:
-"¿Qué es?",
-
-opciones:[
-"Licencia de software",
-"Virus",
-"Contraseña",
-"Hardware"
-],
-
-correcta:0
-
-},
-
-{
-
-nombre:"ARCHIVO LEGAL",
-
-icon:"⚖️",
-
-tipo:"pregunta",
-
-titulo:"LAS CONDICIONES",
-
-descripcion:
-"La pantalla muestra permisos y restricciones.",
-
-pista:
-"PUEDO ESTABLECER DERECHOS, PERMISOS Y RESTRICCIONES PARA EL USUARIO.",
-
-pregunta:
-"¿Cuál es una función de una licencia?",
-
-opciones:[
-"Establecer condiciones de uso",
-"Aumentar memoria RAM",
-"Eliminar virus",
-"Crear electricidad"
-],
-
-correcta:0
-
-},
-
-{
-
-nombre:"SALA DE CONTRATOS",
-
-icon:"🔐",
-
-tipo:"pregunta",
-
-titulo:"NO ROMPAS EL CONTRATO",
-
-descripcion:
-"Un usuario instaló un programa pero nunca revisó sus condiciones.",
-
-pista:
-"ANTES DE UTILIZAR EL SOFTWARE DEBES SABER QUÉ PUEDES Y QUÉ NO PUEDES HACER CON ÉL.",
-
-pregunta:
-"¿Por qué es importante conocer la licencia?",
-
-opciones:[
-"Porque establece condiciones de uso",
-"Porque aumenta la velocidad",
-"Porque cambia el procesador",
-"Porque elimina el antivirus"
-],
-
-correcta:0
-
-},
-
-{
-
-nombre:"PASILLO DE LAS PUERTAS",
-
-icon:"🚪",
-
-tipo:"puertas",
-
-titulo:"LAS CUATRO PUERTAS"
-
-},
-
-{
-
-nombre:"SALA FREEWARE",
-
-icon:"🆓",
-
-tipo:"pregunta",
-
-titulo:"LA TRAMPA DEL GRATIS",
-
-descripcion:
-"La puerta dice FREEWARE.",
-
-pista:
-"PUEDES UTILIZARME SIN PAGAR, PERO ESO NO SIGNIFICA NECESARIAMENTE QUE PUEDAS MODIFICAR MI CÓDIGO.",
-
-pregunta:
-"¿Cuál afirmación es correcta?",
-
-opciones:[
-"Freeware siempre permite modificar el código",
-"Freeware puede ser gratuito sin permitir modificar el código",
-"Freeware es exactamente igual a software libre",
-"Freeware obliga a publicar el código"
-],
-
-correcta:1
-
-},
-
-{
-
-nombre:"SALA DE LIBERTADES",
-
-icon:"🕊️",
-
-tipo:"pregunta",
-
-titulo:"LAS CUATRO LIBERTADES",
-
-descripcion:
-"El sistema escribe cuatro palabras: EJECUTAR, ESTUDIAR, MODIFICAR, COMPARTIR.",
-
-pista:
-"ESTAS LIBERTADES ESTÁN RELACIONADAS CON EL CONCEPTO DE SOFTWARE LIBRE.",
-
-pregunta:
-"¿Qué concepto representa?",
-
-opciones:[
-"Software libre",
-"Software propietario",
-"Hardware",
-"Malware"
-],
-
-correcta:0
-
-},
-
-{
-
-nombre:"TERMINAL OPEN SOURCE",
-
-icon:"💻",
-
-tipo:"pregunta",
-
-titulo:"EL CÓDIGO ABIERTO",
-
-descripcion:
-"El código fuente está disponible. Sin embargo, las condiciones de la licencia siguen siendo importantes.",
-
-pista:
-"EL CÓDIGO FUENTE PUEDE ESTAR DISPONIBLE PARA ESTUDIARLO O MODIFICARLO SEGÚN LA LICENCIA.",
-
-pregunta:
-"¿Con qué concepto se relaciona principalmente?",
-
-opciones:[
-"Open Source",
-"Hardware",
-"Malware",
-"Virus"
-],
-
-correcta:0
-
-},
-
-{
-
-nombre:"OFICINA DE LA EMPRESA",
-
-icon:"🏢",
-
-tipo:"pregunta",
-
-titulo:"EL CÓDIGO SECRETO",
-
-descripcion:
-"Una empresa quiere mantener su código cerrado y controlar su distribución.",
-
-pista:
-"EL PROPIETARIO QUIERE CONSERVAR UN ALTO NIVEL DE CONTROL SOBRE EL CÓDIGO.",
-
-pregunta:
-"¿Qué tipo de licencia podría ser adecuada?",
-
-opciones:[
-"Propietaria",
-"Software libre obligatoriamente",
-"Freeware obligatoriamente",
-"Ninguna"
-],
-
-correcta:0
-
-},
-
-{
-
-nombre:"TERMINAL CENTRAL",
-
-icon:"☠️",
-
-tipo:"pregunta",
-
-titulo:"LA ÚLTIMA DECISIÓN",
-
-descripcion:
-"Has desarrollado un programa educativo. Quieres que otras personas puedan estudiar, modificar y compartir su código respetando las condiciones de la licencia.",
-
-pista:
-"LA LICENCIA DEBE SER COMPATIBLE CON LAS LIBERTADES QUE QUIERES OFRECER.",
-
-pregunta:
-"¿Qué opción podría ser adecuada?",
-
-opciones:[
-"Una licencia libre o de código abierto compatible con ese objetivo",
-"Una licencia que prohíba modificar",
-"No utilizar ninguna licencia",
-"Elegir cualquier licencia sin leerla"
-],
-
-correcta:0
-
-}
-
-];
-
-
-/* =========================================================
-   INICIO
-========================================================= */
+/* =================================
+   INICIAR
+================================= */
 
 function startGame(){
 
-    iniciarAudio();
-
-    jugando=true;
+    document
+        .getElementById("intro")
+        .classList.remove("active");
 
     document
-    .getElementById("intro")
-    .classList.remove("active");
+        .getElementById("game")
+        .classList.add("active");
 
-    document
-    .getElementById("game")
-    .classList.add("active");
+    showStage();
 
-    mostrarHabitacion();
-
-    intervalo=setInterval(contador,1000);
-
-    beep(220,.3,"sawtooth",.04);
-
+    timer = setInterval(updateTimer,1000);
 }
 
 
-/* =========================================================
-   CONTADOR
-========================================================= */
+/* =================================
+   TEMPORIZADOR
+================================= */
 
-function contador(){
+function updateTimer(){
 
-    if(!jugando)return;
+    time--;
 
-    tiempo--;
+    const minutes =
+        Math.floor(time / 60);
 
-    let minutos=
-    Math.floor(tiempo/60);
+    const seconds =
+        time % 60;
 
-    let segundos=
-    tiempo%60;
-
-    document
-    .getElementById("time")
-    .textContent=
-    String(minutos).padStart(2,"0")
-    +":"+
-    String(segundos).padStart(2,"0");
-
-    document
-    .getElementById("progress")
-    .style.width=
-    (tiempo/300*100)+"%";
+    document.getElementById("time")
+        .textContent =
+        String(minutes).padStart(2,"0")
+        + ":"
+        + String(seconds).padStart(2,"0");
 
 
-    if(tiempo<=60){
+    const percentage =
+        (time / TOTAL_TIME) * 100;
+
+    document.getElementById("progress")
+        .style.width =
+        percentage + "%";
+
+
+    if(time <= 30){
 
         document
-        .getElementById("timer")
-        .classList.add("danger");
+            .getElementById("alert")
+            .classList.add("active");
 
-        alarma();
-
-    }
-
-
-    if(tiempo<=30){
-
-        mostrarMensajeAmenaza();
+        document
+            .getElementById("timer")
+            .classList.add("warning");
 
     }
 
 
-    if(tiempo<=0){
+    if(time <= 0){
 
-        perder(
-        "EL TIEMPO TERMINÓ.\n\n"+
-        "El sistema ha tomado el control."
+        clearInterval(timer);
+
+        finish(
+            "⏰",
+            "EL TIEMPO TERMINÓ",
+            "El sistema ha tomado el control.\n\nNo descubriste todos los secretos antes de que el contador llegara a cero."
         );
 
     }
@@ -1434,553 +727,690 @@ function contador(){
 }
 
 
-/* =========================================================
-   MOSTRAR HABITACIÓN
-========================================================= */
+/* =================================
+   MOSTRAR ETAPA
+================================= */
 
-function mostrarHabitacion(){
+function showStage(){
 
-    if(habitacion>=habitaciones.length){
+    const content =
+        document.getElementById("content");
 
-        ganar();
+
+    /* =============================
+       ETAPA 1
+    ============================= */
+
+    if(stage === 0){
+
+        content.innerHTML = `
+
+            <div class="level">
+                ARCHIVO 01 // IDENTIDAD DEL SISTEMA
+            </div>
+
+            <div class="title">
+                LA MÁQUINA ESTÁ VIVA
+            </div>
+
+            <div class="text">
+
+                El computador acaba de encenderse.
+
+                <br><br>
+
+                No puedes ver ninguna pieza física
+                que explique lo que está sucediendo.
+
+                <br><br>
+
+                Sin embargo, hay algo que permite
+                que la máquina ejecute instrucciones,
+                abra aplicaciones y realice tareas.
+
+            </div>
+
+            <div class="clue">
+
+                <strong>PISTA:</strong>
+
+                <br><br>
+
+                "No puedes tocarme.
+                No tengo cuerpo.
+
+                <br><br>
+
+                Pero sin mí,
+                esta máquina no podría ejecutar
+                sus instrucciones."
+
+            </div>
+
+            <div class="text">
+
+                Encuentra qué es aquello
+                que está haciendo funcionar
+                el sistema.
+
+            </div>
+
+            <div class="choices">
+
+                <button class="choice"
+                    onclick="answer(0,true)">
+                    A) Los programas e instrucciones
+                    que permiten realizar tareas
+                </button>
+
+                <button class="choice"
+                    onclick="answer(0,false)">
+                    B) Las partes físicas
+                    del computador
+                </button>
+
+                <button class="choice"
+                    onclick="answer(0,false)">
+                    C) La electricidad
+                </button>
+
+                <button class="choice"
+                    onclick="answer(0,false)">
+                    D) La conexión a Internet
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =============================
+       ETAPA 2
+    ============================= */
+
+    else if(stage === 1){
+
+        content.innerHTML = `
+
+            <div class="level">
+                ARCHIVO 02 // CONTRATO DIGITAL
+            </div>
+
+            <div class="title">
+                EL DOCUMENTO PROHIBIDO
+            </div>
+
+            <div class="text">
+
+                Encuentras un archivo oculto.
+
+                <br><br>
+
+                Al abrirlo aparece una advertencia:
+
+            </div>
+
+            <div class="clue">
+
+                <strong>
+                "PUEDES UTILIZAR ESTE SOFTWARE..."
+                </strong>
+
+                <br><br>
+
+                "...pero existen condiciones que
+                determinan qué puedes hacer con él,
+                copiarlo, modificarlo o distribuirlo."
+
+            </div>
+
+            <div class="text">
+
+                El sistema necesita saber
+                qué concepto describe estas
+                condiciones.
+
+            </div>
+
+            <div class="choices">
+
+                <button class="choice"
+                    onclick="answer(1,true)">
+                    A) Una licencia de software
+                </button>
+
+                <button class="choice"
+                    onclick="answer(1,false)">
+                    B) Un antivirus
+                </button>
+
+                <button class="choice"
+                    onclick="answer(1,false)">
+                    C) Una contraseña
+                </button>
+
+                <button class="choice"
+                    onclick="answer(1,false)">
+                    D) Un navegador web
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =============================
+       ETAPA 3
+    ============================= */
+
+    else if(stage === 2){
+
+        content.innerHTML = `
+
+            <div class="level">
+                ARCHIVO 03 // LAS CUATRO PUERTAS
+            </div>
+
+            <div class="title">
+                LAS LICENCIAS
+            </div>
+
+            <div class="text">
+
+                El laboratorio cambia.
+
+                <br><br>
+
+                Frente a ti aparecen cuatro puertas.
+
+                <br><br>
+
+                Cada una representa una forma
+                diferente de distribuir o licenciar
+                software.
+
+                <br><br>
+
+                Para avanzar debes reconocer
+                cuáles permiten determinadas
+                libertades sobre el código.
+
+            </div>
+
+            <div class="doors">
+
+                <button class="door"
+                    onclick="licenseAnswer('open')">
+
+                    <div class="door-icon">
+                        🔓
+                    </div>
+
+                    <div class="door-name">
+                        CÓDIGO ABIERTO
+                    </div>
+
+                    <small>
+                        OPEN SOURCE
+                    </small>
+
+                </button>
+
+
+                <button class="door"
+                    onclick="licenseAnswer('prop')">
+
+                    <div class="door-icon">
+                        🔐
+                    </div>
+
+                    <div class="door-name">
+                        PROPIETARIA
+                    </div>
+
+                    <small>
+                        RESTRINGIDA
+                    </small>
+
+                </button>
+
+
+                <button class="door"
+                    onclick="licenseAnswer('free')">
+
+                    <div class="door-icon">
+                        🆓
+                    </div>
+
+                    <div class="door-name">
+                        FREEWARE
+                    </div>
+
+                    <small>
+                        GRATUITA
+                    </small>
+
+                </button>
+
+
+                <button class="door"
+                    onclick="licenseAnswer('libre')">
+
+                    <div class="door-icon">
+                        ⚖️
+                    </div>
+
+                    <div class="door-name">
+                        SOFTWARE LIBRE
+                    </div>
+
+                    <small>
+                        LIBERTAD
+                    </small>
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =============================
+       ETAPA 4
+    ============================= */
+
+    else if(stage === 3){
+
+        content.innerHTML = `
+
+            <div class="level">
+                ARCHIVO FINAL // DECISIÓN
+            </div>
+
+            <div class="title">
+                LA ÚLTIMA DECISIÓN
+            </div>
+
+            <div class="text">
+
+                La pantalla comienza a parpadear.
+
+                <br><br>
+
+                El sistema te da una última pista:
+
+            </div>
+
+            <div class="clue">
+
+                <strong>
+                    "NO EXISTE UNA LICENCIA
+                    PERFECTA PARA TODO."
+                </strong>
+
+                <br><br>
+
+                La licencia adecuada depende
+                del proyecto, del nivel de control,
+                de las libertades que se quieran
+                ofrecer y de las condiciones
+                establecidas.
+
+            </div>
+
+            <div class="text">
+
+                Imagina que desarrollaste un programa
+                y quieres que otras personas puedan
+                estudiar, modificar y compartir
+                su código.
+
+                <br><br>
+
+                ¿Qué opción sería más adecuada?
+
+            </div>
+
+            <div class="choices">
+
+                <button class="choice"
+                    onclick="finalAnswer(true)">
+                    A) Una licencia libre
+                    o de código abierto
+                </button>
+
+                <button class="choice"
+                    onclick="finalAnswer(false)">
+                    B) Una licencia que prohíba
+                    modificar el código
+                </button>
+
+                <button class="choice"
+                    onclick="finalAnswer(false)">
+                    C) No utilizar ninguna licencia
+                </button>
+
+                <button class="choice"
+                    onclick="finalAnswer(false)">
+                    D) Elegir cualquier licencia
+                    sin leer sus condiciones
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =================================
+   RESPUESTAS ETAPAS 1 Y 2
+================================= */
+
+function answer(question,correct){
+
+    if(correct){
+
+        score += 100;
+
+        successEffect();
+
+        setTimeout(function(){
+
+            stage++;
+
+            showStage();
+
+        },700);
+
+    }
+
+    else{
+
+        wrongAnswer();
+
+    }
+
+}
+
+
+/* =================================
+   RESPUESTA DE LICENCIAS
+================================= */
+
+function licenseAnswer(type){
+
+    /*
+       Para el objetivo de esta misión,
+       las opciones correctas son:
+
+       Open Source
+       Software Libre
+
+       Freeware significa principalmente
+       que el software se distribuye gratis,
+       pero no necesariamente permite modificar
+       el código.
+
+       Propietaria normalmente mantiene
+       restricciones sobre el código.
+    */
+
+    if(type === "open" || type === "libre"){
+
+        score += 150;
+
+        successEffect();
+
+        setTimeout(function(){
+
+            stage++;
+
+            showStage();
+
+        },700);
+
+    }
+
+    else{
+
+        wrongAnswer();
+
+    }
+
+}
+
+
+/* =================================
+   RESPUESTA FINAL
+================================= */
+
+function finalAnswer(correct){
+
+    if(correct){
+
+        score += 250;
+
+        clearInterval(timer);
+
+        finish(
+
+            "🏆",
+
+            "HAS ESCAPADO",
+
+            "Has conseguido salir del laboratorio.\n\n" +
+
+            "Aprendiste que el software está formado " +
+            "por programas e instrucciones; que una " +
+            "licencia establece las condiciones de uso " +
+            "y distribución; y que existen diferentes " +
+            "tipos de licencias.\n\n" +
+
+            "Para un proyecto que busca permitir estudiar, " +
+            "modificar y compartir el código, una licencia " +
+            "libre o de código abierto puede ser adecuada, " +
+            "dependiendo de sus condiciones específicas.\n\n" +
+
+            "PUNTAJE FINAL: " + score
+
+        );
+
+    }
+
+    else{
+
+        wrongAnswer();
+
+    }
+
+}
+
+
+/* =================================
+   RESPUESTA INCORRECTA
+================================= */
+
+function wrongAnswer(){
+
+    lives--;
+
+    document.getElementById("lives")
+        .textContent = lives;
+
+    if(lives <= 0){
+
+        finish(
+
+            "☠️",
+
+            "EL SISTEMA TE ENCONTRÓ",
+
+            "Has perdido todas tus vidas.\n\n" +
+            "El sistema ha tomado el control " +
+            "del laboratorio.\n\n" +
+            "Tal vez la próxima vez puedas escapar."
+
+        );
 
         return;
 
     }
 
+    showJumpscare();
 
-    const h=
-    habitaciones[habitacion];
+    const content =
+        document.getElementById("content");
 
+    content.innerHTML = `
 
-    const content=
-    document.getElementById("content");
+        <div class="feedback">
 
+            <div class="feedback-icon">
+                ⚠️
+            </div>
 
-    if(h.tipo==="puertas"){
+            <h2>
+                RESPUESTA INCORRECTA
+            </h2>
 
-        mostrarPuertas();
+            <p>
 
-        return;
+                El sistema ha registrado tu error.
 
-    }
+                <br><br>
 
+                Has perdido una vida.
 
-    content.innerHTML=`
+                <br><br>
 
-    <div class="roomTitle">
+                Algo acaba de moverse
+                detrás de ti...
 
-    HABITACIÓN ${habitacion+1}
-    // ${h.nombre}
+            </p>
 
-    </div>
+            <br>
 
-    <div class="bigTitle">
+            <button onclick="showStage()">
+                ⚡ CONTINUAR
+            </button>
 
-    ${h.icon}
-    ${h.titulo}
-
-    </div>
-
-    <div class="description">
-
-    ${h.descripcion}
-
-    </div>
-
-    <div class="clue">
-
-    <strong>PISTA ENCONTRADA:</strong>
-
-    <br><br>
-
-    "${h.pista}"
-
-    </div>
-
-    <div class="description">
-
-    ${h.pregunta}
-
-    </div>
-
-    <div class="options">
-
-    ${h.opciones.map(
-    (opcion,i)=>`
-
-    <button
-    class="option"
-    onclick="responder(${i})">
-
-    ${String.fromCharCode(65+i)})
-    ${opcion}
-
-    </button>
-
-    `).join("")}
-
-    </div>
+        </div>
 
     `;
 
-
-    pasos();
-
 }
 
 
-/* =========================================================
-   PUERTAS
-========================================================= */
-
-function mostrarPuertas(){
-
-    const content=
-    document.getElementById("content");
-
-    content.innerHTML=`
-
-    <div class="roomTitle">
-    PASILLO // ARCHIVO DE LICENCIAS
-    </div>
-
-    <div class="bigTitle">
-    🚪 LAS CUATRO PUERTAS
-    </div>
-
-    <div class="description">
-
-    El pasillo está completamente oscuro.
-
-    <br><br>
-
-    Cuatro puertas aparecen.
-
-    <br><br>
-
-    Solo una representa correctamente
-    las libertades que buscas.
-
-    </div>
-
-    <div class="clue">
-
-    <strong>PISTA:</strong>
-
-    <br><br>
-
-    "No confundas GRATIS con LIBRE.
-    Busca una puerta relacionada con
-    las libertades del usuario."
-
-    </div>
-
-    <div class="doors">
-
-    <button
-    class="door"
-    onclick="puerta('open')">
-
-    <span class="roomIcon">🔓</span>
-
-    OPEN SOURCE
-
-    </button>
-
-    <button
-    class="door"
-    onclick="puerta('prop')">
-
-    <span class="roomIcon">🔐</span>
-
-    PROPIETARIA
-
-    </button>
-
-    <button
-    class="door"
-    onclick="puerta('free')">
-
-    <span class="roomIcon">🆓</span>
-
-    FREEWARE
-
-    </button>
-
-    <button
-    class="door"
-    onclick="puerta('libre')">
-
-    <span class="roomIcon">⚖️</span>
-
-    SOFTWARE LIBRE
-
-    </button>
-
-    </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   RESPUESTA
-========================================================= */
-
-function responder(respuesta){
-
-    const h=
-    habitaciones[habitacion];
-
-
-    if(respuesta===h.correcta){
-
-        puntaje+=100;
-
-        sonidoCorrecto();
-
-        inventario.push(
-        "Pista "+(habitacion+1)
-        );
-
-        habitacion++;
-
-        amenaza=Math.max(
-        0,
-        amenaza-4
-        );
-
-        actualizarAmenaza();
-
-        setTimeout(
-        mostrarHabitacion,
-        500
-        );
-
-    }else{
-
-        error();
-
-    }
-
-}
-
-
-/* =========================================================
-   PUERTAS
-========================================================= */
-
-function puerta(tipo){
-
-    if(
-    tipo==="open" ||
-    tipo==="libre"
-    ){
-
-        puntaje+=100;
-
-        sonidoCorrecto();
-
-        habitacion++;
-
-        setTimeout(
-        mostrarHabitacion,
-        500
-        );
-
-    }else{
-
-        error();
-
-    }
-
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-function error(){
-
-    vidas--;
-
-    amenaza+=25;
-
-    if(amenaza>100)
-    amenaza=100;
-
-    document
-    .getElementById("lives")
-    .textContent=vidas;
-
-    actualizarAmenaza();
-
-    sonidoError();
-
-    mostrarSusto();
-
-
-    if(vidas<=0){
-
-        setTimeout(
-        function(){
-
-            perder(
-            "Has perdido tus 2 vidas.\n\n"+
-            "El sistema ya no puede contenerlo."
-            );
-
-        },
-        900
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   AMENAZA
-========================================================= */
-
-function actualizarAmenaza(){
-
-    document
-    .getElementById("threatFill")
-    .style.width=
-    amenaza+"%";
-
-    document
-    .getElementById("threatNumber")
-    .textContent=
-    amenaza+"%";
-
-
-    if(amenaza>=75){
-
-        document.body.style.background="#160202";
-
-    }
-
-
-    if(amenaza>=100){
-
-        setTimeout(
-        mostrarSusto,
-        300
-        );
-
-    }
-
-}
-
-
-/* =========================================================
+/* =================================
    SUSTO
-========================================================= */
+================================= */
 
-function mostrarSusto(){
+function showJumpscare(){
 
-    const j=
-    document.getElementById("jumpscare");
+    const scare =
+        document.getElementById("jumpscare");
 
-    j.classList.add("show");
+    scare.classList.add("show");
 
-    beep(45,.7,"sawtooth",.1);
+    setTimeout(function(){
 
-    setTimeout(
-    ()=>{
-        j.classList.remove("show");
-    },
-    750
-    );
+        scare.classList.remove("show");
+
+    },650);
 
 }
 
 
-/* =========================================================
-   MENSAJES DE AMENAZA
-========================================================= */
+/* =================================
+   EFECTO CORRECTO
+================================= */
 
-function mostrarMensajeAmenaza(){
+function successEffect(){
 
-    const mensajes=[
+    const alert =
+        document.getElementById("alert");
 
-    "ÉL TE ESTÁ OBSERVANDO.",
+    alert.style.background =
+        "rgba(0,255,80,.10)";
 
-    "NO MIRES DETRÁS DE TI.",
+    alert.style.opacity = "1";
 
-    "EL TIEMPO SE TERMINA.",
+    setTimeout(function(){
 
-    "ÉL YA SABE TU RESPUESTA.",
+        alert.style.opacity = "0";
 
-    "NO COMETAS OTRO ERROR."
+        alert.style.background =
+            "rgba(255,0,0,.10)";
 
-    ];
-
-    const mensaje=
-    mensajes[
-    Math.floor(
-    Math.random()*mensajes.length
-    )
-    ];
-
-    const content=
-    document.getElementById("content");
-
-    const anterior=
-    content.innerHTML;
-
-    content.innerHTML=`
-
-    <div class="warningBox">
-
-    ⚠ ALERTA DEL SISTEMA
-
-    <br><br>
-
-    ${mensaje}
-
-    </div>
-
-    `;
-
-    setTimeout(
-    ()=>{
-        if(jugando){
-            content.innerHTML=anterior;
-        }
-    },
-    900
-    );
+    },350);
 
 }
 
 
-/* =========================================================
-   FINAL PERDER
-========================================================= */
+/* =================================
+   FINAL DEL JUEGO
+================================= */
 
-function perder(mensaje){
+function finish(icon,title,text){
 
-    if(!jugando)return;
-
-    jugando=false;
-
-    clearInterval(intervalo);
-
-    sonidoError();
+    clearInterval(timer);
 
     document
-    .getElementById("game")
-    .classList.remove("active");
+        .getElementById("game")
+        .classList.remove("active");
 
     document
-    .getElementById("final")
-    .classList.add("active");
+        .getElementById("final")
+        .classList.add("active");
 
     document
-    .getElementById("finalTitle")
-    .textContent="FRACASASTE";
+        .getElementById("finalIcon")
+        .textContent = icon;
 
     document
-    .getElementById("finalTitle")
-    .className="failTitle";
+        .getElementById("finalTitle")
+        .textContent = title;
 
     document
-    .getElementById("finalText")
-    .textContent=
-    mensaje+
-    "\n\nPUNTAJE: "+
-    puntaje+
-    "\n\nEL SISTEMA TE HA ENCONTRADO.";
-
-    document
-    .getElementById("monster")
-    .style.display="block";
+        .getElementById("finalText")
+        .textContent = text;
 
 }
 
 
-/* =========================================================
-   FINAL GANAR
-========================================================= */
-
-function ganar(){
-
-    jugando=false;
-
-    clearInterval(intervalo);
-
-    sonidoCorrecto();
-
-    document
-    .getElementById("game")
-    .classList.remove("active");
-
-    document
-    .getElementById("final")
-    .classList.add("active");
-
-    const monster=
-    document.getElementById("monster");
-
-    monster.style.display="none";
-
-    const title=
-    document.getElementById("finalTitle");
-
-    title.textContent=
-    "HAS ESCAPADO";
-
-    title.className=
-    "successTitle";
-
-    document
-    .getElementById("finalText")
-    .textContent=
-
-    "SISTEMA DESBLOQUEADO.\n\n"+
-    "12/12 PRUEBAS SUPERADAS.\n\n"+
-    "AMENAZA: "+amenaza+"%.\n\n"+
-    "VIDAS RESTANTES: "+vidas+".\n\n"+
-    "PUNTAJE FINAL: "+puntaje+".\n\n"+
-    "Comprendiste qué es el software,\n"+
-    "qué es una licencia de software,\n"+
-    "los principales tipos de licencia\n"+
-    "y por qué la licencia adecuada\n"+
-    "depende de los objetivos del proyecto.\n\n"+
-    "EL LABORATORIO TE HA DEJADO ESCAPAR.";
-
-}
-
-
-/* =========================================================
-   TECLADO
-========================================================= */
+/* =================================
+   ENTER PARA COMENZAR
+================================= */
 
 document.addEventListener(
-"keydown",
-function(e){
+    "keydown",
+    function(event){
 
-    if(
-    e.key==="Enter" &&
-    document
-    .getElementById("intro")
-    .classList.contains("active")
-    ){
+        if(
+            event.key === "Enter" &&
+            document
+                .getElementById("intro")
+                .classList.contains("active")
+        ){
 
-        startGame();
+            startGame();
+
+        }
 
     }
-
-});
-
+);
 
 </script>
 
 </body>
 </html>
+```
